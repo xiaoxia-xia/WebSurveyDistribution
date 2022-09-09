@@ -25,6 +25,9 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
+
+
 /* 
 equalvelent with 
 authRoutes = require('./routes/authRoutes');
