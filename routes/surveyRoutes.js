@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
-const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
-module.exports = app => {
+const Survey = mongoose.model('surveys');
+
+module.exports = (app) => {
     app.post('/api/surveys', requireLogin, requireCredits, (req, res) =>{
         const { title, subject, body, recepients } = req.body;
 
@@ -19,7 +20,6 @@ module.exports = app => {
         });
 
         const mailer = new Mailer(survey, surveyTemplate(survey));
-
         mailer.send();
     });
 };
