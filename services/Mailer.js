@@ -26,7 +26,7 @@ class Mailer extends helper.Mail{
     
     addClickTracking(){
         const trackingSettings = new helper.TrackingSettings();
-        const clickTracking = new helper.clickTracking(true, true);
+        const clickTracking = new helper.ClickTracking(true, true);
 
         trackingSettings.setClickTracking(clickTracking);
         this.addTrackingSettings(trackingSettings);
@@ -37,7 +37,7 @@ class Mailer extends helper.Mail{
         this.recepients.forEach(recepient => {
             personalize.addTo(recepient);
         });
-        this.Personalization(personalize);
+        this.addPersonalization(personalize);
     }
 
 
