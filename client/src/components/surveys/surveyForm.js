@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './surveyField';
 import {Link} from 'react-router-dom';
+import validateEmails from '../../util/validateEmail'
 
 const FIELDS = [
     {label: "Survey Title", name: "title"},
@@ -29,18 +30,17 @@ class SurveyForm extends Component{
     render(){
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit(value => console.log(value))}>
+                <form onSubmit={this.props.handleSubmit(() => this.props.onSurveySubmit())}>
                     {this.renderFields()}
                     <button type="submit"></button>
                     <Link to="/surveys" className='red btn-flat white-text'>
                         Cancel
                     </Link>
 
-                <button type='submit' className='teal btn-flat right white-text'>
+                    <button type='submit' className='teal btn-flat right white-text'>
                     submit
-                    <i className='material-icons right'>done</i>
-                </button>
-
+                        <i className='material-icons right'>done</i>
+                    </button>
                 </form>
             </div>
         );
@@ -50,6 +50,7 @@ class SurveyForm extends Component{
 function validate(values){
     const errors ={};
     
+    errors.emails = validateEmails(values.emails || '');
     _.each(FIELDS, ({name})=> {
         if(!values[name]){
             errors[name] = 'You must provide the value'
