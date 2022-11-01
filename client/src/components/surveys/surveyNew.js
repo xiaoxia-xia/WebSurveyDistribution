@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SurveyForm from './surveyForm';
-import SurveyReview from './surveyFormReview'
+import SurveyFormReview from './surveyFormReview'
 
 class SurveyNew extends Component{
     state = {showFormReview: false};
@@ -8,20 +8,20 @@ class SurveyNew extends Component{
     renderContent(){
         if (this.state.showFormReview) {
             return (
-            <surveyFormReview 
+            <SurveyFormReview
                 onCancel={() => this.setState({ showFormReview: false})}
             />
             );
         } 
 
-        return <surveyForm 
+        return <SurveyForm 
         onSurveySumbmit={() => this.setState({ showFormReview: true})} />
     }
 
     render(){
         return (
             <div>
-                {this.renderContent};
+                {this.renderContent()};
             </div>
         );
     }
